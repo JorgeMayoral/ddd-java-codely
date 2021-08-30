@@ -1,15 +1,13 @@
 package tv.codely.mooc.courses.domain;
 
-import java.util.Objects;
-
 public final class Course {
     private final CourseId id;
     private final CourseName name;
     private final CourseDuration duration;
 
     public Course(CourseId id, CourseName name, CourseDuration duration) {
-        this.id       = id;
-        this.name     = name;
+        this.id = id;
+        this.name = name;
         this.duration = duration;
     }
 
