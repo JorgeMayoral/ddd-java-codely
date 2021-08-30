@@ -1,26 +1,29 @@
 package tv.codely.mooc.students.application.create;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tv.codely.mooc.students.domain.*;
+import tv.codely.mooc.students.StudentModuleUnitTestCase;
+import tv.codely.mooc.students.domain.Student;
+import tv.codely.mooc.students.domain.StudentMother;
 
-import static org.mockito.Mockito.*;
+final class StudentCreatorShould extends StudentModuleUnitTestCase {
+    private StudentCreator creator;
 
-class StudentCreatorShould {
+    @BeforeEach
+    protected void setUp() {
+        super.setUp();
+
+        creator = new StudentCreator(repository);
+    }
+
     @Test
     void create_a_valid_student() {
-        StudentRepository repository = mock(StudentRepository.class);
-        StudentCreator creator = new StudentCreator(repository);
+        CreateStudentRequest request = CreateStudentRequestMother.random();
 
-        String id = "12f41915-0828-48d3-9a26-bd1ef79ed6a4";
-        String name = "some-name";
-        String email = "some-email";
-
-        CreateStudentRequest request = new CreateStudentRequest(id, name, email);
-
-        Student student = new Student(new StudentId(request.id()), new StudentName(request.name()), new StudentEmail(request.email()));
+        Student student = StudentMother.fromRequest(request);
 
         creator.create(request);
 
-        verify(repository, atLeastOnce()).save(student);
+        shouldHaveSaved(student);
     }
 }

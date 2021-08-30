@@ -2,8 +2,6 @@ package tv.codely.mooc.courses.domain;
 
 import tv.codely.mooc.courses.application.create.CreateCourseRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public final class CourseMother {
     public static Course create(CourseId id, CourseName name, CourseDuration duration) {
         return new Course(id, name, duration);
